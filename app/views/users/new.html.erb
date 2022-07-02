@@ -1,0 +1,26 @@
+<h1>アカウント登録</h1>
+
+<p>
+    <% if !logged_in? %>
+        <%= form_for @user, url: signup_path do |form| %>
+            <%= form.label "Name :" %>
+            <%= form.text_field :username %> <br />
+            <%= form.label "addrss:" %>
+            <%= form.text_field :eth_address, readonly: true, class: "eth_address" %> <br />
+        <% end %>
+        <button class="eth_connect">メタマスクでサインアップ</button>
+        <br/><br/>
+        <%= link_to "ログイン", login_path %>
+        または
+        <%= link_to "ホームへ", root_path %>?
+    <% else %>
+        こんにちは<strong><%= current_user.username %></strong>
+        あなたのアドレス：<code><%= current_user.eth_address.slice(0, 3) + "…" + current_user.eth_address.slice(-3, 3)  %></code>
+        <br/><br/>
+        <%= link_to "ログアウト", logout_path, method: :destroy %>
+        または
+        <%= link_to "ホームへ", root_path %>?
+    <% end %>
+    </p>
+
+<%= javascript_pack_tag "users_new" %>

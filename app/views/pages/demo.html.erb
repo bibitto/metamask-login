@@ -1,0 +1,15 @@
+<h1>メタマスク認証デモアプリ</h1>
+<p>デモアプリへようこそ！</p>
+<p>
+    <% if !logged_in? %>
+        初めての方はまず登録しよう→
+        <%= link_to "サインアップ", signup_path %>
+        <br>
+        既にアカウントを持っている方はこちら→
+        <%= link_to "ログイン", login_path %>?
+    <% else %>
+        こんにちは<strong><%= current_user.username %></strong>!<br>
+        あなたのアドレス：<code><%= current_user.eth_address.slice(0, 3) + "…" + current_user.eth_address.slice(-3, 3) %></code><br>
+        <%= link_to "ログアウト", logout_path, method: :destroy %>
+    <% end %>
+</p>
